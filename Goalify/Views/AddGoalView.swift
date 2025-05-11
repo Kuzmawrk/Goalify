@@ -3,7 +3,7 @@ import SwiftUI
 struct AddGoalView: View {
     @EnvironmentObject private var viewModel: GoalsViewModel
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.tabSelection) private var tabSelection
+    @Environment(\.tabSelection) private var tabSelection: Int
     
     @State private var title = ""
     @State private var description = ""

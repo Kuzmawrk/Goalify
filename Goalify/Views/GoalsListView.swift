@@ -17,11 +17,16 @@ struct GoalsListView: View {
         .navigationTitle("My Goals")
         .overlay {
             if viewModel.goals.isEmpty {
-                ContentUnavailableView(
-                    "No Goals Yet",
-                    systemImage: "target",
-                    description: Text("Tap the + tab to add your first goal")
-                )
+                VStack(spacing: 12) {
+                    Image(systemName: "target")
+                        .font(.system(size: 50))
+                        .foregroundColor(.secondary)
+                    Text("No Goals Yet")
+                        .font(.title2)
+                    Text("Tap the + tab to add your first goal")
+                        .foregroundColor(.secondary)
+                }
+                .padding()
             }
         }
         .overlay(alignment: .top) {
