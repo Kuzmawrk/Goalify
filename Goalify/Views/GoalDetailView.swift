@@ -43,18 +43,23 @@ struct GoalDetailView: View {
                         .font(.headline)
                     
                     ForEach(goal.tasks) { task in
-                        Button {
-                            viewModel.toggleTaskCompletion(goalId: goal.id, taskId: task.id)
-                        } label: {
-                            HStack {
+                        HStack {
+                            Button {
+                                viewModel.toggleTaskCompletion(goalId: goal.id, taskId: task.id)
+                            } label: {
                                 Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
                                     .foregroundColor(task.isCompleted ? .green : .gray)
-                                Text(task.title)
-                                    .strikethrough(task.isCompleted)
-                                Spacer()
                             }
+                            
+                            Text(task.title)
+                                .strikethrough(task.isCompleted)
+                                .foregroundColor(.primary)
+                            Spacer()
                         }
-                        .buttonStyle(.plain)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            viewModel.toggleTaskCompletion(goalId: goal.id, taskId: task.id)
+                        }
                     }
                 }
             }
