@@ -3,7 +3,7 @@ import SwiftUI
 struct AddGoalView: View {
     @EnvironmentObject private var viewModel: GoalsViewModel
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.tabSelection) private var tabSelection: Int
+    @Environment(\.tabSelection) private var tabSelection: Binding<Int>
     
     @State private var title = ""
     @State private var description = ""
@@ -60,7 +60,7 @@ struct AddGoalView: View {
                     newTask = ""
                     
                     // Switch to first tab
-                    tabSelection = 0
+                    tabSelection.wrappedValue = 0
                 }
                 .disabled(title.isEmpty)
             }

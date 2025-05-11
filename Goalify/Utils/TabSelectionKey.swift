@@ -1,11 +1,11 @@
 import SwiftUI
 
-private struct TabSelectionKey: EnvironmentKey {
-    static let defaultValue: Int = 0
+struct TabSelectionKey: EnvironmentKey {
+    static let defaultValue: Binding<Int> = .constant(0)
 }
 
 extension EnvironmentValues {
-    var tabSelection: Int {
+    var tabSelection: Binding<Int> {
         get { self[TabSelectionKey.self] }
         set { self[TabSelectionKey.self] = newValue }
     }
