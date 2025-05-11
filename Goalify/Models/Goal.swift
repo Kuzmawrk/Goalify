@@ -1,6 +1,6 @@
 import Foundation
 
-struct Goal: Identifiable, Codable, Equatable {
+struct Goal: Identifiable, Codable, Equatable, Hashable {
     var id: UUID
     var title: String
     var description: String
@@ -9,7 +9,7 @@ struct Goal: Identifiable, Codable, Equatable {
     var tasks: [Task]
     var isCompleted: Bool
     
-    struct Task: Identifiable, Codable, Equatable {
+    struct Task: Identifiable, Codable, Equatable, Hashable {
         var id: UUID
         var title: String
         var isCompleted: Bool
