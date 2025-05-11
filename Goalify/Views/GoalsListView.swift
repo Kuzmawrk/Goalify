@@ -75,9 +75,25 @@ struct GoalCardView: View {
             }
         }
         .padding()
-        .background(Color(.systemBackground))
+        .background {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            Color(.systemBackground),
+                            Color(.systemBackground).opacity(0.95)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+        }
+        .overlay {
+            RoundedRectangle(cornerRadius: 12)
+                .strokeBorder(Color.primary.opacity(0.1), lineWidth: 1)
+        }
         .cornerRadius(12)
-        .shadow(radius: 2)
+        .shadow(color: Color.primary.opacity(0.1), radius: 5, x: 0, y: 2)
     }
 }
 
