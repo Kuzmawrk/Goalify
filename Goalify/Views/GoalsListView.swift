@@ -4,7 +4,6 @@ struct GoalsListView: View {
     @EnvironmentObject private var viewModel: GoalsViewModel
     
     var body: some View {
-        Group {
         ScrollView {
             LazyVStack(spacing: 16) {
                 ForEach(viewModel.goals) { goal in
@@ -52,7 +51,6 @@ struct GoalsListView: View {
             if value == "addGoal" {
                 AddGoalView()
             }
-        }
     }
 }
 
