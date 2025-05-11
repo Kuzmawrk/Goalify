@@ -4,10 +4,11 @@ struct MainTabView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     @StateObject private var goalsViewModel = GoalsViewModel()
     @State private var selectedTab = 0
+    @State private var path = NavigationPath()
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            NavigationStack {
+            NavigationStack(path: $path) {
                 GoalsListView()
             }
             .tabItem {

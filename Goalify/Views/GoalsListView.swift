@@ -4,10 +4,12 @@ struct GoalsListView: View {
     @EnvironmentObject private var viewModel: GoalsViewModel
     
     var body: some View {
+        Group {
         ScrollView {
             LazyVStack(spacing: 16) {
-                ForEach(viewModel.goals) { goal in
-                    NavigationLink(destination: GoalDetailView(goal: goal)) {
+                   NavigationLink(value: goal) {
+                    GoalCardView(goal: goal)
+                }estination: GoalDetailView(goal: goal)) {
                         GoalCardView(goal: goal)
                     }
                 }
@@ -17,7 +19,7 @@ struct GoalsListView: View {
         .navigationTitle("My Goals")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: AddGoalView()) {
+                NavigationLink(value: "addGoal") {
                     Image(systemName: "plus.circle.fill")
                         .font(.title3)
                 }
@@ -44,6 +46,15 @@ struct GoalsListView: View {
             }
         }
         .animation(.spring(response: 0.3), value: viewModel.showSuccessNotification)
+        }
+        .navigationDestination(for: Goal.self) { goal in
+            GoalDetailView(goal: goal)
+        }
+        .navigationDestination(for: String.self) { value in
+            if value == "addGoal" {
+                AddGoalView()
+            }
+        }
     }
 }
 
