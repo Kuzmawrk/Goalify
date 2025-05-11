@@ -41,10 +41,12 @@ class GoalsViewModel: ObservableObject {
            let taskIndex = goals[goalIndex].tasks.firstIndex(where: { $0.id == taskId }) {
             goals[goalIndex].tasks[taskIndex].isCompleted.toggle()
             
-            // Update progress
+            // Update progress and completion status
             let completedTasks = goals[goalIndex].tasks.filter { $0.isCompleted }.count
             let totalTasks = goals[goalIndex].tasks.count
+            
             goals[goalIndex].progress = totalTasks > 0 ? Double(completedTasks) / Double(totalTasks) : 0.0
+            goals[goalIndex].isCompleted = totalTasks > 0 && completedTasks == totalTasks
             
             saveGoals()
         }
