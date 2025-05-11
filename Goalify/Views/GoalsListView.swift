@@ -15,6 +15,14 @@ struct GoalsListView: View {
             .padding()
         }
         .navigationTitle("My Goals")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(destination: AddGoalView()) {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.title3)
+                }
+            }
+        }
         .overlay {
             if viewModel.goals.isEmpty {
                 VStack(spacing: 12) {

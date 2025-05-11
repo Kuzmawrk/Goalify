@@ -16,10 +16,10 @@ struct MainTabView: View {
             .tag(0)
             
             NavigationStack {
-                AddGoalView()
+                StatisticsView()
             }
             .tabItem {
-                Label("Add Goal", systemImage: "plus.circle.fill")
+                Label("Statistics", systemImage: "chart.bar.fill")
             }
             .tag(1)
             
