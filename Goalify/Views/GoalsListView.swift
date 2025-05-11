@@ -51,6 +51,7 @@ struct GoalsListView: View {
             if value == "addGoal" {
                 AddGoalView()
             }
+        }
     }
 }
 
