@@ -7,9 +7,8 @@ struct GoalsListView: View {
         Group {
         ScrollView {
             LazyVStack(spacing: 16) {
-                   NavigationLink(value: goal) {
-                    GoalCardView(goal: goal)
-                }estination: GoalDetailView(goal: goal)) {
+                ForEach(viewModel.goals) { goal in
+                    NavigationLink(value: goal) {
                         GoalCardView(goal: goal)
                     }
                 }
@@ -46,7 +45,6 @@ struct GoalsListView: View {
             }
         }
         .animation(.spring(response: 0.3), value: viewModel.showSuccessNotification)
-        }
         .navigationDestination(for: Goal.self) { goal in
             GoalDetailView(goal: goal)
         }
