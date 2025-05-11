@@ -4,9 +4,13 @@ struct GoalDetailView: View {
     @EnvironmentObject private var viewModel: GoalsViewModel
     @Environment(\.dismiss) private var dismiss
     
-    let goal: Goal
+    let goalId: UUID
     @State private var isEditing = false
     @State private var showingDeleteAlert = false
+    
+    private var goal: Goal {
+        viewModel.goals.first { $0.id == goalId }!
+    }
     
     var body: some View {
         ScrollView {
@@ -95,7 +99,7 @@ struct GoalDetailView: View {
         }
         .sheet(isPresented: $isEditing) {
             NavigationStack {
-                EditGoalView(goal: goal)
+                EditGoalView(goal: goal, goalId: goalId)
             }
         }
         .alert("Delete Goal", isPresented: $showingDeleteAlert) {
@@ -115,14 +119,16 @@ struct EditGoalView: View {
     @Environment(\.dismiss) private var dismiss
     
     let goal: Goal
+    let goalId: UUID
     @State private var title: String
     @State private var description: String
     @State private var deadline: Date
     @State private var tasks: [Goal.Task]
     @State private var newTask = ""
     
-    init(goal: Goal) {
+    init(goal: Goal, goalId: UUID) {
         self.goal = goal
+        self.goalId = goalId
         _title = State(initialValue: goal.title)
         _description = State(initialValue: goal.description)
         _deadline = State(initialValue: goal.deadline)

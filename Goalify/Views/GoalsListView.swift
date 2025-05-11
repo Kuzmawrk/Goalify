@@ -45,7 +45,7 @@ struct GoalsListView: View {
         }
         .animation(.spring(response: 0.3), value: viewModel.showSuccessNotification)
         .navigationDestination(for: Goal.self) { goal in
-            GoalDetailView(goal: goal)
+            GoalDetailView(goalId: goal.id)
         }
         .navigationDestination(for: String.self) { value in
             if value == "addGoal" {
