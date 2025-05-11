@@ -33,6 +33,6 @@ struct MainTabView: View {
         }
         .environmentObject(goalsViewModel)
         .preferredColorScheme(isDarkMode ? .dark : .light)
-        .environment(\.tabSelection, selectedTab)
+        .environment(\.tabSelection, $selectedTab)
     }
 }
