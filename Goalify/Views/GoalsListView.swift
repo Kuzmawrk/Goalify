@@ -57,6 +57,7 @@ struct GoalsListView: View {
 
 struct GoalCardView: View {
     let goal: Goal
+    @EnvironmentObject private var viewModel: GoalsViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -72,6 +73,27 @@ struct GoalCardView: View {
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .lineLimit(2)
+            
+            if !goal.tasks.isEmpty {
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(goal.tasks) { task in
+                        Button(action: {
+                            viewModel.toggleTaskCompletion(goalId: goal.id, taskId: task.id)
+                        }) {
+                            HStack {
+                                Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
+                                    .foregroundColor(task.isCompleted ? .green : .gray)
+                                Text(task.title)
+                                    .font(.subheadline)
+                                    .foregroundColor(.primary)
+                                Spacer()
+                            }
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                    }
+                }
+                .padding(.vertical, 4)
+            }
             
             ProgressView(value: goal.progress)
                 .tint(.green)
