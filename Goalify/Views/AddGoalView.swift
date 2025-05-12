@@ -59,8 +59,9 @@ struct AddGoalView: View {
                     tasks = []
                     newTask = ""
                     
-                    // Switch to first tab
+                    // Switch to first tab and dismiss
                     tabSelection.wrappedValue = 0
+                    dismiss()
                 }
                 .disabled(title.isEmpty)
             }

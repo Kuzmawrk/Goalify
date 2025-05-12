@@ -203,14 +203,18 @@ struct EditGoalView: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
+                    // Calculate new progress based on completed tasks
+                    let completedTasks = tasks.filter { $0.isCompleted }.count
+                    let newProgress = tasks.isEmpty ? 0.0 : Double(completedTasks) / Double(tasks.count)
+                    
                     let updatedGoal = Goal(
                         id: goal.id,
                         title: title,
                         description: description,
                         deadline: deadline,
-                        progress: goal.progress,
+                        progress: newProgress,
                         tasks: tasks,
-                        isCompleted: goal.isCompleted
+                        isCompleted: !tasks.isEmpty && completedTasks == tasks.count
                     )
                     viewModel.updateGoal(updatedGoal)
                     dismiss()
