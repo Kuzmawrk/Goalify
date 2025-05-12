@@ -37,10 +37,11 @@ struct GoalsListView: View {
                 .padding()
             }
         }
-        .overlay(alignment: .top) {
+        .overlay(alignment: .bottom) {
             if viewModel.showSuccessNotification {
                 NotificationBanner(text: "Goal added successfully!")
-                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                    .padding(.bottom)
             }
         }
         .animation(.spring(response: 0.3), value: viewModel.showSuccessNotification)
